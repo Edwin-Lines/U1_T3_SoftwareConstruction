@@ -1,62 +1,54 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bank.model;
 
-
-public class Bank{
+public class Bank {
     private Customer[] clients;
-    private int numberOfCustomers;
-    
-    public Bank(int maxClients){
+    private int currentNumClient;
+
+    public Bank(int maxClients) {
         clients = new Customer[maxClients];
-        numberOfCustomers = 0;
+        currentNumClient = 0;
     }
-    
-    public boolean addCustomer(Customer client){
-        boolean flag = false;
-        if(numberOfCustomers < clients.length ){
-            clients[numberOfCustomers] = client;
-            numberOfCustomers++;
-            flag = true;
+
+    public boolean addCustomer(Customer client) {
+        boolean isClientLimit = false;
+        if (currentNumClient < clients.length) {
+            clients[currentNumClient] = client;
+            currentNumClient++;
+            isClientLimit = true;
         }
-        return flag;
+        return isClientLimit;
     }
-    
-    public boolean removeCustomer(int IDcustomer){
-        boolean flag = false;
-            for(int i = 0; i < numberOfCustomers; i++){
-                if(clients[i].getIDCustomer() == IDcustomer){
-                    clients[i] = clients[numberOfCustomers-1];
-                    clients[numberOfCustomers-1] = null;
-                    numberOfCustomers--;
-                    flag = true;
-                }
-            }
-        
-        return flag;
-    }
-    
-    public Customer searchClient(int IDClient){
-        Customer temp = null;
-        for(Customer client: clients){
-            if(client.getIDCustomer() == IDClient){
-                temp = client;
+
+    public boolean removeCustomer(int IDcustomer) {
+        boolean isClientLimit = false;
+        for (int i = 0; i < currentNumClient; i++) {
+            if (clients[i].getIDCustomer() == IDcustomer) {
+                clients[i] = clients[currentNumClient - 1];
+                clients[currentNumClient - 1] = null;
+                currentNumClient--;
+                isClientLimit = true;
             }
         }
-        return temp;
+
+        return isClientLimit;
     }
-    
-    public String toString(){
-      String output= "";
-      for(int i = 0; i < numberOfCustomers; i++){
-          output += clients[i].toString() +"\n";
-      }
-      return output;
+
+    public Customer searchClient(int clientID) {
+        Customer searchedClient = null;
+        for (Customer client : clients) {
+            if (client.getIDCustomer() == clientID) {
+                searchedClient = client;
+            }
+        }
+        return searchedClient;
     }
-    
-    
-    
+
+    public String toString() {
+        String clientList = "";
+        for (int i = 0; i < currentNumClient; i++) {
+            clientList += clients[i].toString() + "\n";
+        }
+        return clientList;
+    }
+
 }

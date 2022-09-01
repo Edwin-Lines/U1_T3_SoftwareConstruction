@@ -1,59 +1,44 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bank.model;
 
-public class Account{                           
-    public static final String  CREDIT= "CREDIT";
+public class Account {
+    public static final String CREDIT = "CREDIT";
     public static final String DEBIT = "DEBIT";
-    
-    private static int IDkey;
-    private int IDaccount;
-    private double balance; 
-    private String typeAccount;
-    
-    public Account (String typeAccount, double balance) {               
-        this.IDaccount =IDkey;
-        IDkey++;
-        this.typeAccount = typeAccount;
+    private static int primaryKey;
+    private int accountID;
+    private double balance;
+    private String accountType;
+
+    public Account(String accountType, double balance) {
+        this.accountID = primaryKey;
+        primaryKey++;
+        this.accountType = accountType;
         this.balance = balance;
     }
-    
-    /*public Account (double balance) {               
-        this.IDaccount =IDkey;
-        IDkey++;
-        this.balance = balance;
-    }
-    */
-    public double withdraw(double ammount){
-        if(balance>=ammount){
+
+    public double withdraw(double ammount) {
+        if (balance >= ammount) {
             balance = balance - ammount;
         }
         return balance;
     }
-    
-    public double deposit(double ammount){
-        
+
+    public double deposit(double ammount) {
         return balance;
     }
-    
-    public void setBalance (double balance){
+
+    public void setBalance(double balance) {
         this.balance = balance;
     }
-    
-    public double getBalance (){
+
+    public double getBalance() {
         return balance;
     }
-    
-    public int getIDAccount(){
-        return this.IDaccount;
+
+    public int getAccountID() {
+        return this.accountID;
     }
-    
-    public String toString(){
-        return "ID Account: " +IDaccount +
-               ", Type: " + typeAccount+
-               " ,Balance: " + balance;
+
+    public String toString() {
+        return "ID Account: " + accountID + ", Type: " + accountType + " ,Balance: " + balance;
     }
 }
